@@ -98,3 +98,19 @@ The estimated paired gain is 0.226 hours (95% interval −0.027 to 0.493). The i
 
 Use the central focal plane and the first annotated t4 frame. Build an image manifest keyed by full embryo ID, annotated start frame and path. Report missing or unreadable frames before fitting. Extract frozen ResNet-18 features with external pretrained weights. Compare timing-only ridge regression with timing-plus-image ridge regression on the same image-eligible embryos and outer folds. Fit scaling, any dimension reduction and hyperparameter selection within training data. The timing-only result above provides a reference. The image experiment requires its own matched comparison.
 
+
+### Build the four-cell image manifest
+
+Extract the Zenodo v3 central-plane archive `embryo_dataset.tar.gz` under `data/raw/`.
+The image root contains one folder per full embryo ID. Use the extracted annotations from the timing experiment. From the project root run:
+
+```shell
+python -m pip install -e .
+python -m first_four_cells.cli image-manifest
+```
+
+Use `--annotations DIR` and `--images DIR` for custom locations. The command matches the annotation start frame to the exact numeric RUN suffix and decodes the JPEG. The output at `data/processed/t4_image_manifest.csv` includes one row per cohort embryo. Resolve `image_path` relative to the image root. Use only rows with status `ok` in a matched image experiment. Inspect the other statuses to audit coverage.
+
+### Explore two embryos visually
+
+Run `python -m first_four_cells.cli visualize` and open `reports/embryo-explorer.html` in a browser. It uses bundled held-out predictions by default. Pass `--predictions runs/baseline/predictions.csv` to inspect your own run. The initial pair has the closest four-cell times and, among ties, the largest difference in time spent at three cells. Select any other pair or switch the model in the cohort scatterplot. The report embeds thumbnails when the t4 manifest and images are available. Pass `--images DIR` for a custom central-plane folder and regenerate after building a new manifest.

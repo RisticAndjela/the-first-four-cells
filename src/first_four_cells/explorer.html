@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="sr-Latn"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The First Four Cells · Poređenje embriona</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f3ed;color:#162f31;font:16px/1.45 Inter,Arial,sans-serif}main{max-width:1100px;margin:auto;padding:46px 24px}header{border-top:4px solid #236b67;padding:18px 0}h1,h2{font-family:Georgia,serif;font-weight:normal;margin:.2em 0}h1{font-size:clamp(36px,6vw,66px);letter-spacing:-.05em}h2{font-size:28px}p{margin:6px 0 18px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}article,section{background:#fffefa;border:1px solid #d6d9cf;padding:24px;border-radius:12px}section{margin-top:18px}select{display:block;width:100%;font:inherit;margin:6px 0 16px;padding:8px;background:white;color:inherit;border:1px solid #99aaa4;border-radius:5px}.line{display:grid;grid-template-columns:75px 1fr 65px;gap:9px;align-items:center;margin:8px 0;font-size:14px}.track{background:#e5ebe6;height:7px;border-radius:6px}.bar{background:#28746f;height:100%;border-radius:6px}.late{background:#9c5432}.num{text-align:right;font-variant-numeric:tabular-nums}table{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}td,th{padding:7px 2px;border-bottom:1px solid #ddd;text-align:right}td:first-child,th:first-child{text-align:left}figure{margin:18px 0 0}img{width:160px;border-radius:8px}figcaption,small{color:#50625e}svg{width:100%;max-height:340px;display:block}svg text{fill:#284442;font:13px Arial}@media(max-width:700px){.grid{grid-template-columns:1fr}main{padding:20px 12px}article,section{padding:16px}}
+</style><main><header><small>The First Four Cells</small><h1>Dva embriona, četiri ćelije</h1><p>Uporedi ritam ranih deoba i prognozu napravljenu u trenutku pojave četvrte ćelije.</p></header>
+<div class="grid" id="cards"></div>
+<section><h2>Koliko je prognoza blizu opažanju?</h2><label for="model">Model</label><select id="model"><option value="clock">Vreme do četiri ćelije</option><option value="rhythm" selected>Vreme i ritam deoba</option></select><p id="summary"></p><svg id="scatter" role="img" aria-label="Dijagram opaženih i predviđenih preostalih sati do blastociste"></svg><small>Svaka tačka predstavlja jedan embrion. Na dijagonali su predviđeno i opaženo vreme jednaki. Iznad nje model procenjuje da je potrebno više vremena.</small></section></main>
+<script>
+const data=/*COHORT_DATA*/;
+const fmt=n=>n.toLocaleString("sr-Latn",{minimumFractionDigits:1,maximumFractionDigits:1});
+const maxTime=Math.max(...data.map(e=>e.times[3]));
+const selected=[0,1];
+// Choose a reproducible starting pair by early timing only.
+let closest=Infinity, gap=-1;
+for(let i=0;i<data.length;i++)for(let j=i+1;j<data.length;j++){
+ const a=data[i].times,b=data[j].times,d=Math.abs(a[2]-b[2]),g=Math.abs((a[2]-a[1])-(b[2]-b[1]));
+ if(d<closest || (d===closest && g>gap)){closest=d;gap=g;selected[0]=i;selected[1]=j}
+}
+function el(tag,parent,text){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;parent.append(e);return e}
+const bodies=[];
+selected.forEach((index,k)=>{
+ const card=el("article",cards), label=el("label",card,"Embrion "+(k===0?"A":"B")), menu=el("select",label);
+ data.forEach((e,i)=>menu.add(new Option(e.id,i)));menu.value=index;
+ bodies.push(el("div",card));menu.onchange=()=>{selected[k]=Number(menu.value);draw()};
+});
+function cardView(root,e){
+ root.replaceChildren();el("h2",root,"Razvoj kroz vreme");el("small",root,"Protekli sati od oplodnje · ista skala za oba embriona");
+ ["2 ćelije","3 ćelije","4 ćelije","Blastocista"].forEach((s,i)=>{
+ const row=el("div",root);row.className="line";el("span",row,s);
+ const track=el("div",row);track.className="track";const bar=el("div",track);bar.className="bar"+(i===3?" late":"");bar.style.width=100*e.times[i]/maxTime+"%";el("span",row,fmt(e.times[i])+" h").className="num";
+ });
+ const obs=e.times[3]-e.times[2];el("p",root,"Od četiri ćelije do blastociste: "+fmt(obs)+" h.");
+ const t=el("table",root),h=el("tr",t);["Model","Prognoza¹","Greška²"].forEach(v=>el("th",h,v));
+ for(const key of ["clock","rhythm"]){const r=el("tr",t);[key==="clock"?"Vreme":"Vreme + ritam",fmt(e.predictions[key]-e.times[2])+" h",fmt(Math.abs(e.predictions[key]-e.times[3]))+" h"].forEach(v=>el("td",r,v))}
+ el("small",root,"¹ Preostalo vreme od četvrte ćelije. ² Apsolutna greška.");
+ if(e.image){const f=el("figure",root),im=el("img",f);im.src="data:image/jpeg;base64,"+e.image;im.alt="Prvi četvoroćelijski kadar embriona "+e.id;el("figcaption",f,"Centralna ravan · kadar "+e.frame)}
+}
+function draw(){
+ selected.forEach((i,k)=>cardView(bodies[k],data[i]));
+ const model=document.querySelector("#model").value,svg=document.querySelector("#scatter");
+ svg.replaceChildren();svg.setAttribute("viewBox","0 0 650 335");
+ function shape(tag,attrs,txt){const n=document.createElementNS("http://www.w3.org/2000/svg",tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));if(txt)n.textContent=txt;svg.append(n);return n}
+ const pts=data.map(e=>[e.times[3]-e.times[2],e.predictions[model]-e.times[2]]);
+ const limit=Math.ceil(Math.max(...pts.flat())/20)*20,lo=Math.min(0,Math.floor(Math.min(...pts.flat())/20)*20);
+ const x=v=>60+(v-lo)/(limit-lo)*555,y=v=>282-(v-lo)/(limit-lo)*245;
+ for(let v=lo;v<=limit;v+=20){shape("line",{x1:x(v),x2:x(v),y1:37,y2:282,stroke:"#e3e9e4"});shape("line",{x1:60,x2:615,y1:y(v),y2:y(v),stroke:"#e3e9e4"});shape("text",{x:x(v),y:303,"text-anchor":"middle"},String(v));shape("text",{x:50,y:y(v)+4,"text-anchor":"end"},String(v))}
+ shape("line",{x1:x(lo),x2:x(limit),y1:y(lo),y2:y(limit),stroke:"#5a6e68","stroke-dasharray":"5 4"});
+ shape("text",{x:60,y:19},"Predviđeno (h)");shape("text",{x:615,y:328,"text-anchor":"end"},"Opaženo (h)");
+ pts.forEach(([a,b])=>shape("circle",{cx:x(a),cy:y(b),r:3,fill:"#28746f",opacity:.48}));
+ selected.forEach((i,k)=>{const [a,b]=pts[i];shape("circle",{cx:x(a),cy:y(b),r:6,fill:"none",stroke:"#9c5432","stroke-width":2});shape("text",{x:x(a)+(k?-9:9),y:y(b)-6},k?"B":"A")});
+ const mae=pts.reduce((s,[a,b])=>s+Math.abs(a-b),0)/pts.length;
+ document.querySelector("#summary").textContent=data.length+" embriona · prosečna apsolutna greška na izdvojenim predikcijama: "+fmt(mae)+" h.";
+}
+document.querySelector("#model").onchange=draw;draw();
+</script></html>

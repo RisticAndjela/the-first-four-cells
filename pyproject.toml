@@ -7,10 +7,13 @@ name = "the-first-four-cells"
 version = "0.1.0"
 description = "Landmark forecasts of observed blastocyst timing"
 requires-python = ">=3.11"
-dependencies = ["numpy>=1.26,<3", "scikit-learn>=1.4,<2"]
+dependencies = ["numpy>=1.26,<3", "scikit-learn>=1.4,<2", "Pillow>=10"]
 
 [project.scripts]
 four-cells = "first_four_cells.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+first_four_cells = ["explorer.html"]
