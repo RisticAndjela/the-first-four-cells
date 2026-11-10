@@ -4,7 +4,30 @@
 
 Two embryos can reach four cells at the same hour after fertilization. One may have spent much longer at three cells. Does knowing that history improve a forecast of how many hours remain until a blastocyst is observed?
 
-This independent machine learning project uses time-lapse annotations from Nantes University Hospital. The dataset audit below is complete. Model training and evaluation are planned.
+This independent machine learning project uses time-lapse annotations from Nantes University Hospital. The package includes a verified cohort, a runnable timing experiment and its held-out predictions.
+
+## Run the foundation
+
+From the extracted project directory, use Python 3.11 or later. The processed cohort ships with the project, so the timing experiment can run immediately. On Windows, activate the environment with `.venv\Scripts\activate`. On Linux or macOS, use `source .venv/bin/activate`.
+
+```bash
+python -m venv .venv
+# Activate the environment, then run
+python -m pip install -e .
+four-cells evaluate
+python -m unittest discover -s tests -v
+```
+
+Open `runs/baseline/metrics.csv` and `paired_gain.csv`. Per-embryo predictions include the fold and the predicted hour of blastocyst formation. Each run uses a fresh output directory. For a second run use, for example, `four-cells evaluate --output runs/second`. The bundled reference run is under `results/reference/`.
+
+| Path | Responsibility |
+| --- | --- |
+| `src/first_four_cells/cohort.py` | Join event annotations to timestamps and audit exclusions |
+| `src/first_four_cells/protocol.py` | Define the prediction cutoff and allowed features for each stage |
+| `src/first_four_cells/evaluation.py` | Share folds across stages, fit models and quantify paired errors |
+| `src/first_four_cells/cli.py` | Expose the cohort and evaluation commands |
+| `scripts/build_cohort.py` | Preserve the original standalone cohort command |
+| `tests/` | Check cutoff features, group separation and held-out metrics |
 
 ## Dataset and local setup
 
@@ -55,23 +78,23 @@ Use the first frame labeled `tB` for the observed blastocyst. The separate `tSB`
 
 For embryo `MM445-2-2`, the blastocyst annotation starts at frame 610 and the timestamp file ends at frame 565. Exclude this row from the hours-based comparison. Preserve missing events in the audit so that an unobserved three-cell stage is distinguishable from a measured short interval.
 
-## Experiment
+To rebuild both tables after extracting the archives, run `four-cells cohort` from the repository root.
 
-Fit three predictors on the same 287 embryos. Give each embryo one held-out prediction from each model using identical five-fold splits. If verified patient or treatment-cycle identifiers are available, keep related embryos in the same fold. Otherwise use seeded embryo-level splits and document that patient-level independence remains unverified.
+## Timing experiment
 
-| Predictor | Inputs | Purpose |
-| --- | --- | --- |
-| Training median | Median remaining time in the training fold | Reference error in hours |
-| Four-cell model | `t4` | Forecast from arrival time alone |
-| Rhythm model | `t4`, `t3 − t2`, `t4 − t3` | Measure the contribution of early division timing |
+The primary comparison starts at t4. Both ordinary linear regression models forecast remaining hours until tB. The clock model uses only t4. The rhythm model also uses t3 − t2 and t4 − t3. A third predictor returns the median remaining time from the training fold. Exploratory t2 and t3 runs use the same complete-case cohort and fold assignments. At t2 the clock is the only measured timing feature. At t3 the rhythm model gains its first interval. Adding the observed landmark time to a remaining-time forecast gives the predicted hour of tB and preserves its absolute error.
 
-Start with ordinary linear regression for both fitted models. Compute mean absolute error (MAE) from pooled held-out predictions. Report the paired difference **MAE(four-cell) − MAE(rhythm)** in hours. A positive value favors the rhythm model. Report uncertainty with a paired bootstrap of held-out errors, resampling by patient or cycle if grouping is verified.
+The reference run uses five shuffled embryo-level folds and seed 42. Verified patient or cycle IDs were unavailable for this run. Patient-level independence remains unverified. To use verified groups, supply `--groups groups.csv` with columns `embryo_id,group_id`. Grouped evaluation keeps related embryos together and bootstraps whole groups. The paired 95% percentile interval uses 5,000 resamples of held-out errors and is conditional on these fitted folds.
 
-## Planned outputs
+| Four-cell predictor | Held-out MAE (hours) |
+| --- | ---: |
+| Training median | 8.197 |
+| Clock | 8.306 |
+| Clock and rhythm | 8.080 |
 
-- An embryo-level analysis table with event times, derived intervals and an exclusion log.
-- A reproducible Python analysis with saved fold assignments and held-out predictions.
-- A results table with MAE in hours for all three predictors and the paired improvement.
-- A timeline figure comparing two embryos with similar four-cell timing and different early intervals. Show the forecast cutoff and the observed blastocyst time for each.
+The estimated paired gain is 0.226 hours (95% interval −0.027 to 0.493). The interval includes zero. This cohort includes embryos with complete early annotations and an observed blastocyst at one center. Earlier-stage comparisons inherit the same selection.
 
-The estimate applies to embryos with the required early annotations and an observed blastocyst in this single-center dataset. The experiment evaluates developmental timing. Implantation, pregnancy and live birth are outside its scope.
+## Next experiment with microscopy
+
+Use the central focal plane and the first annotated t4 frame. Build an image manifest keyed by full embryo ID, annotated start frame and path. Report missing or unreadable frames before fitting. Extract frozen ResNet-18 features with external pretrained weights. Compare timing-only ridge regression with timing-plus-image ridge regression on the same image-eligible embryos and outer folds. Fit scaling, any dimension reduction and hyperparameter selection within training data. The timing-only result above provides a reference. The image experiment requires its own matched comparison.
+

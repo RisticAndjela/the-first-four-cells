@@ -1,0 +1,9 @@
+{
+  "seed": 42,
+  "folds": 5,
+  "fold_unit": "embryo",
+  "bootstrap_draws": 5000,
+  "cohort_sha256": "36f2a0052b53977761a31a059ba318fcc654f02b82a0d12686f7a325ffdd0df9",
+  "numpy": "2.3.5",
+  "sklearn": "1.8.0"
+}

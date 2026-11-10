@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "the-first-four-cells"
+version = "0.1.0"
+description = "Landmark forecasts of observed blastocyst timing"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26,<3", "scikit-learn>=1.4,<2"]
+
+[project.scripts]
+four-cells = "first_four_cells.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
