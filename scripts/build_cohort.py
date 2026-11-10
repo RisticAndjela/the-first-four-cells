@@ -9,7 +9,7 @@ from first_four_cells.cohort import build
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--raw-dir", type=Path, default=ROOT / "data/raw")
+    parser.add_argument("--raw-dir", type=Path, default=ROOT / "data")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "data/processed")
     args = parser.parse_args()
     build(args.raw_dir, args.output_dir)

@@ -1,0 +1,245 @@
+path,embryos
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,92
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,33
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t8 > t9+ > tM > tSB > tB > tEB,23
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t7 > t8 > t9+ > tM > tSB > tB > tEB,21
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB,17
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t8 > t9+ > tM > tSB > tB > tEB,17
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+,14
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,12
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,11
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t9+ > tM > tSB > tB > tEB,10
+tPB2 > tPNa > tPNf > t2 > t4 > t8 > t9+ > tM > tSB > tB > tEB,9
+tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,9
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t8 > t9+ > tM > tSB > tB > tEB,9
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM,9
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t8 > t9+ > tM,7
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t7 > t8 > t9+ > tM > tSB > tB > tEB,7
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t8 > t9+ > tM > tSB > tB,7
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB,7
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t7 > t8 > t9+ > tM > tSB > tB > tEB,6
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t7 > t8 > t9+ > tM > tSB > tB,6
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t7 > t8,6
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB,6
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8,5
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t6 > t7 > t8 > t9+,5
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t8,5
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t8 > t9+ > tM > tSB > tB > tEB,5
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t8 > t9+ > tM > tSB > tB > tEB,5
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7,5
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t7 > t8 > t9+ > tM > tSB,5
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t7 > t8 > t9+ > tM > tSB > tB,5
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > tM > tSB > tB > tEB,5
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t7 > t8 > t9+ > tM > tSB,4
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t8 > t9+ > tM > tSB > tB > tEB,4
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t8 > t9+,4
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t7 > t8 > t9+,4
+tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,4
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t8,4
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5,4
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB,4
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t7 > t8 > t9+,4
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6,4
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t8 > t9+ > tM > tSB > tB > tEB,4
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t8 > t9+ > tM > tSB,4
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t8,4
+tPB2 > tPNa > tPNf > t2 > t4 > t7 > t9+ > tM > tSB > tB > tEB,4
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t9+ > tM > tSB > tB,3
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t8 > tM > tSB > tB > tEB,3
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t9+ > tM > tSB > tB,3
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > tM > tSB > tB > tEB,3
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t9+ > tM > tSB > tB > tEB,3
+tPB2 > tPNa > tPNf > t2 > t4 > t7 > t8 > t9+ > tM > tSB > tB > tEB,3
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t7 > t8 > t9+ > tM > tSB > tB,3
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t8 > t9+ > tM > tSB > tB,3
+tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t8 > t9+ > tM > tSB > tB > tEB,3
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t7 > t8 > t9+ > tM > tSB,3
+tPB2 > tPNa > tPNf > t2 > t4 > t7 > t8 > t9+,3
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t7 > t8 > t9+,3
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t8 > t9+ > tM > tSB,3
+tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8,3
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t7 > t9+ > tM > tSB > tB > tEB,3
+tPB2 > tPNa > tPNf > t2 > t4 > t8 > t9+,3
+tPNa > tPNf > t2 > t3 > t4 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,3
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t9+ > tM > tSB > tB > tEB,3
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6,2
+tPB2 > tPNa > tPNf > t2 > t4 > t8 > t9+ > tM,2
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t7 > t8,2
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t8 > t9+,2
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t8 > t9+ > tM,2
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t7 > t8 > t9+ > tM > tSB,2
+tPB2 > t2 > t4 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,2
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t8 > t9+,2
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB,2
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > tM > tSB > tB,2
+tPB2 > tPNa > tPNf > t2 > t3 > t4,2
+tPNf > t2 > t3 > t4 > t5 > t8 > t9+ > tM > tSB > tB > tEB,2
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t8 > t9+ > tM > tSB > tB,2
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t7 > t8,2
+tPNf > t2 > t4 > t5 > t6 > t8,2
+tPNf > t2 > t3 > t4 > t5 > t7 > t8 > t9+ > tM > tSB > tB > tEB,2
+tPB2 > tPNa > tPNf > t2 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB,2
+tPB2 > tPNa > tPNf > t2 > t5 > t6 > t7 > t9+ > tM > tSB > tB > tEB,2
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t7 > t8 > t9+ > tM > tSB,2
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,2
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t7 > t8 > tM > tSB > tB > tEB,2
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t7 > t8 > t9+ > tM > tSB > tB,2
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > tM,2
+tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB,2
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t9+ > tM > tSB > tB > tEB,2
+tPNf > t2 > t3 > t4 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,2
+tPNf > t2 > t4 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,2
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t7 > t8,2
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t8 > t9+,2
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t8 > t9+ > tM > tSB > tB,2
+tPB2 > tPNa > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t7 > t9+,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t7 > t9+ > tM > tSB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t9+ > tM > tSB > tB,1
+t2 > t4 > t5 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPNf > t2 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB,1
+tPNa > tPNf > t2 > t3 > t4 > t6 > t7,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t9+ > tM,1
+tPNa > tPNf > t2 > t4 > t5 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t7 > t8 > t9+ > tM,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t7 > t9+ > tM > tSB,1
+tPNa > tPNf > t2 > t3 > t4 > t5 > t8 > tM > tSB > tB > tEB,1
+tPNa > tPNf > t2 > t4 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t8 > t9+,1
+tPNf > t2 > t3 > t4 > t5 > t6 > t8,1
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t6 > t7 > t8 > t9+ > tM,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t8 > t9+ > tM > tSB,1
+tPB2 > tPNa > tPNf > t5 > t6 > t7 > t9+ > tM > tSB > tB > tEB,1
+tPNf > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t7 > t8 > tM,1
+tPNa > tPNf > t2 > t3 > t5 > t7,1
+tPNa > tPNf > t2 > t3 > t5 > t6 > t7 > t8,1
+tPNf > t2 > t3 > t5 > t7 > t8 > t9+,1
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t6 > t7 > t9+ > tM > tSB > tB,1
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t8 > t9+ > tM,1
+tPB2 > tPNa > tPNf > t3 > t4 > t5 > t6 > t7 > t8 > tM > tSB > tB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t6 > t8 > t9+ > tM > tSB > tB,1
+tPB2 > tPNa > tPNf > t2 > t5 > t6 > t7 > t8 > t9+ > tM > tSB,1
+tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPNf > t2 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t6,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t7 > t8 > tM > tSB,1
+tPNa > tPNf > t3 > t4 > t5 > t6 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t4 > t5,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t7 > t8 > t9+ > tM,1
+tPB2 > tPNa > tPNf > t3 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tEB,1
+tPNa > tPNf > t2 > t5 > t8 > t9+ > tM,1
+tPB2 > tPNa > tPNf > t2 > t5 > t6 > t7 > tM > tSB > tB,1
+tPNa > tPNf > t3 > t4 > t5 > t6,1
+tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t8 > t9+,1
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t9+,1
+tPNf > t2 > t4 > t5 > t6 > t9+,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t7 > tM > tSB > tB > tEB,1
+tPNf > t6 > t7 > t9+ > tM > tB > tEB,1
+tPNf > t2 > t4 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPNf > t2 > t4 > t7 > t9+ > tM > tSB > tB > tEB,1
+t2 > t4 > t5 > t6 > t7 > t8,1
+tPB2 > tPNa > tPNf > t2 > t4 > t8,1
+tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t9+,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t8 > tM,1
+tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM,1
+tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t9+ > tM > tSB > tB > tEB,1
+t5 > t7 > t9+ > tM > tSB > tB > tEB,1
+tPNa > tPNf > t2 > t3 > t4 > t5 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > t2 > t3 > t4 > t7,1
+tPNf > t2 > t3 > t5 > t6 > t7 > t8 > t9+ > tM > tSB,1
+tPB2 > tPNa > tPNf > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t8 > t9+ > tM > tSB > tB,1
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t8,1
+tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t8,1
+tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t7 > t8 > t9+ > tM,1
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t8 > t9+ > tM > tSB > tB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > tM > tSB > tB > tEB,1
+tPNf > t2 > t4 > t7 > t8 > t9+ > tM > tSB > tB,1
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t7 > t8 > t9+,1
+tPNa > tPNf > t2 > t4 > t6 > t7 > t8 > t9+ > tM > tSB > tB,1
+tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB,1
+tPNf > t2 > t3 > t4 > t6 > t7 > t8 > t9+,1
+tPNa > tPNf > t2 > t3 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t7 > t8 > t9+ > tM > tSB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t8 > tM > tSB > tB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t9+ > tM > tSB > tB > tEB,1
+tPNf > t2 > t3 > t4 > t6 > t9+ > tM > tSB > tB > tEB,1
+tPNf > t2 > t3 > t4 > t5 > t6 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t7 > tM > tSB > tB,1
+tPB2 > tPNa > tPNf > t2 > t5 > t6 > t7 > t8 > tM,1
+tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+,1
+tPB2 > tPNa > tPNf > t2 > t5 > t7 > t9+,1
+tPNf > t2 > t3 > t4 > t5 > t6 > t8 > t9+ > tM > tSB > tB,1
+tPNf > t2 > t4 > t6 > t7 > t8 > t9+ > tM > tSB > tB,1
+tPNa > tPNf > t3 > t5 > t6 > t7 > t8,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t8 > t9+,1
+tPNa > tPNf > t2 > t3 > t4 > t5 > t7 > t9+ > tM > tSB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t8 > t9+ > tM > tSB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB > tHB,1
+t2 > t3 > t4 > t5 > t6 > t7 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t6 > t7 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t4 > t7 > t8 > t9+ > tM,1
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t7 > t9+,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t7 > t8 > t9+ > tM > tSB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t9+,1
+tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t9+,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t7 > tM > tSB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t7 > tM,1
+tPB2 > tPNa > tPNf > t3 > t5 > t6 > t7 > t9+,1
+tPNa > tPNf > t2 > t4 > t5 > t6 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t7,1
+tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t8 > t9+,1
+tPNf > t2 > t3 > t4 > t6 > t7 > t8,1
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t8,1
+tPNa > tPNf > t2 > t4 > t6 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPNf > t2 > t3 > t4 > t6 > t8 > t9+,1
+tPNa > tPNf > t2 > t3 > t5 > t6 > t7 > t9+,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t9+ > tM > tSB > tB > tEB,1
+tPNf > t2 > t4 > t5 > t6 > t7 > t8,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t7 > t8 > t9+ > tM > tSB > tB > tEB > tHB,1
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB > tHB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > tM > tSB > tB > tEB > tHB,1
+tPNf > t2 > t5 > t6 > t7 > t8 > t9+,1
+tPNa > tPNf > t2 > t3 > t4 > t6 > t7 > t8 > t9+ > tM > tSB,1
+tPB2 > tPNa > t2 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t6 > t7 > t8 > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPNf > t2 > t3 > t4 > t5 > t7 > t8 > t9+ > tM > tSB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t8 > t9+ > tM > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t7 > t8 > t9+ > tM > tSB > tB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t6 > t7 > t9+ > tM > tSB > tB > tEB,1
+tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM,1
+tPB2 > tPNa > tPNf > t5 > t6 > t7 > t9+,1
+t2 > t3 > t4 > t5 > t6 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t8 > t9+ > tM,1
+tPB2 > tPNa > tPNf > t3 > t4 > t6 > t7 > t8,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t8 > t9+ > tM > tSB,1
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t7 > t8 > t9+ > tM > tSB > tB,1
+tPNa > tPNf > t2 > t3 > t5 > t6 > t7,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tEB,1
+tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t9+ > tM > tSB > tB > tEB,1
+tPNf > t2 > t4 > t5 > t7 > t8 > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t9+ > tM > tSB,1
+tPB2 > tPNa > tPNf > t2 > t5 > t7 > t8 > t9+,1
+tPNf > t2 > t3 > t4 > t5 > t8 > t9+ > tM > tSB > tB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t6 > t8 > t9+,1
+tPB2 > tPNa > tPNf > t2 > t3 > t5 > t6 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t4 > t6 > t9+,1
+tPB2 > tPNa > tPNf > t2 > t3 > t4 > t5 > t6 > t8 > tM > tSB > tB > tEB,1
+tPNa > tPNf > t2 > t4 > t6 > t8,1
+tPNf > t4 > t5 > t6 > t7 > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t3 > t4 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB,1
+tPB2 > tPNa > t2 > t3 > t4 > t5 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPNa > tPNf > t2 > t4 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPB2 > tPNa > tPNf > t2 > t3 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPNa > tPNf > t2 > t5 > t6 > t7 > t8 > t9+,1
+tPB2 > tPNa > tPNf > t2 > t4 > t5 > t6 > t7 > t9+ > tM,1
+tPB2 > tPNa > tPNf > t2 > t5 > t6 > t7 > t8 > t9+ > tM > tSB > tB > tEB > tHB,1
+tPB2 > tPNa > tPNf > t2 > t5 > t7 > t8 > t9+ > tM > tSB > tB > tEB,1
+tPNf > t2 > t3 > t4 > t5 > t6 > t7 > t8 > tM > tSB > tB > tEB,1

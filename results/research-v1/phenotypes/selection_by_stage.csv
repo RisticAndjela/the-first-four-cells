@@ -1,0 +1,9 @@
+cohort,stage,n_observed,median_h
+included,t2,287,27.2
+included,t3,287,38.1
+included,t4,287,40.0
+included,tB,287,111.7
+other,t2,402,26.8
+other,t3,172,37.9
+other,t4,362,39.05
+other,tB,181,109.1

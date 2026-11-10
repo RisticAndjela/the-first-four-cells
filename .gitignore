@@ -5,3 +5,8 @@ build/
 dist/
 data/raw/
 runs/
+
+# Machine-specific wheel metadata and extracted upstream inputs
+*.pyc
+data/embryo_dataset_annotations/
+data/embryo_dataset_time_elapsed/

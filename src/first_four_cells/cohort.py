@@ -1,6 +1,7 @@
 """Build the embryo timing cohort from the two extracted Zenodo v3 archives."""
 
 import csv
+from .layout import source_folder
 from collections import Counter
 from decimal import Decimal
 from pathlib import Path
@@ -51,8 +52,8 @@ def match_times(path, frames):
 
 
 def build(raw: Path, output: Path) -> None:
-    annotations = sorted((raw / "embryo_dataset_annotations").glob("*_phases.csv"))
-    clocks = raw / "embryo_dataset_time_elapsed"
+    annotations = sorted(source_folder(raw, "embryo_dataset_annotations", "_phases.csv").glob("*_phases.csv"))
+    clocks = source_folder(raw, "embryo_dataset_time_elapsed", "_timeElapsed.csv")
     if not annotations or not any(clocks.glob("*_timeElapsed.csv")):
         raise SystemExit(f"Extract both Zenodo archives under {raw} (see README.md).")
 

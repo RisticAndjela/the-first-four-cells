@@ -295,8 +295,23 @@
         gap: 12px;
     }
 
+    .controls {
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+    }
+    .controls select, button {
+        min-height: 42px;
+        line-height: 1.25;
+    }
+    .controls select {
+        margin: 5px 0 0;
+    }
+    button:focus-visible, select:focus-visible {
+        outline: 2px solid var(--teal);
+        outline-offset: 2px;
+    }
     .controls label {
-        min-width: 210px;
+        min-width: min(210px, 100%);
     }
 
     button {
@@ -306,7 +321,8 @@
         color: var(--navy);
         background: #fff;
         cursor: pointer;
-        font: 700 .84rem/1 Inter, ui-sans-serif, sans-serif;
+        white-space: nowrap;
+        font: 700 .84rem/1.25 Inter, ui-sans-serif, sans-serif;
     }
 
     button:hover {
@@ -413,8 +429,7 @@
             padding: 20px
         }
 
-        .section-header,
-        .controls {
+        .section-header {
             display: block
         }
 
@@ -423,7 +438,7 @@
         }
 
         .controls button {
-            margin: 0 8px 10px 0
+            margin: 0
         }
 
         .chart-shell {
@@ -474,7 +489,7 @@
                 agreement</span></div>
         <p class="caption">Axes show hours remaining from the first t4 frame to the observed or predicted first
             blastocyst frame. Points above the diagonal are overestimates; points below it are underestimates. Use
-            <em>Expand chart</em> for a larger, scale-adjustable view.</p>
+            the wheel over the plot to zoom in or out. Double-click to reset.</p>
     </section>
 </main>
 <dialog id="chart-dialog" aria-label="Expanded prediction chart">
@@ -483,13 +498,12 @@
             <div>
                 <div class="eyebrow">Detailed view</div>
                 <h2>Observed versus predicted time</h2>
-                <p class="caption">Adjust the scale to inspect the central cohort or the full range. The data and
-                    selected model remain the same.</p>
+                <p class="caption">Adjust the scale to inspect the central cohort or the full range. Scroll up to zoom in and down to zoom out. Double-click to reset.</p>
             </div><button type="button" id="close-chart">Close</button>
         </div>
         <div class="controls"><label for="scale">Chart scale<select id="scale">
                     <option value="full">Full observed range</option>
-                    <option value="focus">Focus on 35–105 hours</option>
+                    <option value="focus">Focus on 35–105 hours</option><option value="custom" disabled>Custom zoom</option>
                 </select></label></div>
         <div class="chart-shell"><svg id="expanded-scatter" role="img"
                 aria-label="Expanded observed and predicted chart"></svg></div>
@@ -600,31 +614,39 @@
         return data.map(embryo => ({ observed: embryo.times[3] - embryo.times[2], predicted: embryo.predictions[model] - embryo.times[2] }));
     }
 
-    function drawChart(svg, points, scale) {
+    const margin = { top: 48, right: 42, bottom: 72, left: 82 };
+    let viewport = null;
+    function fullSpan(points) {
+        return Math.ceil(Math.max(...points.flatMap(p => [p.observed, p.predicted])) / 20) * 20;
+    }
+    function drawChart(svg, points) {
         svg.replaceChildren();
         svg.setAttribute("viewBox", "0 0 760 510");
-        const margin = { top: 48, right: 42, bottom: 72, left: 82 };
-        const range = scale === "focus" ? { minimum: 35, maximum: 105, step: 10 } : { minimum: 0, maximum: Math.ceil(Math.max(...points.flatMap(point => [point.observed, point.predicted])) / 20) * 20, step: 20 };
+        const {left, bottom, span} = viewport ?? {left: 0, bottom: 0, span: fullSpan(points)};
         const width = 760 - margin.left - margin.right;
         const height = 510 - margin.top - margin.bottom;
-        const x = value => margin.left + (value - range.minimum) / (range.maximum - range.minimum) * width;
-        const y = value => margin.top + height - (value - range.minimum) / (range.maximum - range.minimum) * height;
-        for (let tick = range.minimum; tick <= range.maximum; tick += range.step) {
+        const x = value => margin.left + (value - left) / span * width;
+        const y = value => margin.top + height - (value - bottom) / span * height;
+        const step = [0.5, 1, 2, 5, 10, 20, 50, 100].find(n => span / n <= 9) ?? 100;
+        for (let tick = Math.ceil(left / step) * step; tick <= left + span; tick += step) {
             createSvgElement(svg, "line", { x1: x(tick), x2: x(tick), y1: margin.top, y2: margin.top + height, stroke: "#e6eef5" });
-            createSvgElement(svg, "line", { x1: margin.left, x2: margin.left + width, y1: y(tick), y2: y(tick), stroke: "#e6eef5" });
             createSvgElement(svg, "text", { x: x(tick), y: margin.top + height + 25, "text-anchor": "middle" }, tick);
+        }
+        for (let tick = Math.ceil(bottom / step) * step; tick <= bottom + span; tick += step) {
+            createSvgElement(svg, "line", { x1: margin.left, x2: margin.left + width, y1: y(tick), y2: y(tick), stroke: "#e6eef5" });
             createSvgElement(svg, "text", { x: margin.left - 12, y: y(tick) + 4, "text-anchor": "end" }, tick);
         }
-        createSvgElement(svg, "line", { x1: x(range.minimum), x2: x(range.maximum), y1: y(range.minimum), y2: y(range.maximum), stroke: "#93a5b7", "stroke-width": 1.5, "stroke-dasharray": "6 5" });
+        const start = Math.max(left, bottom), end = Math.min(left + span, bottom + span);
+        if (start <= end) createSvgElement(svg, "line", { x1: x(start), x2: x(end), y1: y(start), y2: y(end), stroke: "#93a5b7", "stroke-width": 1.5, "stroke-dasharray": "6 5" });
         createSvgElement(svg, "text", { x: margin.left, y: 22, "font-weight": "700" }, "Predicted remaining hours");
         createSvgElement(svg, "text", { x: margin.left + width, y: 496, "text-anchor": "end", "font-weight": "700" }, "Observed remaining hours");
         points.forEach(point => {
-            const visible = point.observed >= range.minimum && point.observed <= range.maximum && point.predicted >= range.minimum && point.predicted <= range.maximum;
+            const visible = point.observed >= left && point.observed <= left + span && point.predicted >= bottom && point.predicted <= bottom + span;
             if (visible) createSvgElement(svg, "circle", { cx: x(point.observed), cy: y(point.predicted), r: 4, fill: "#2f80ed", opacity: ".5" });
         });
         selected.forEach((embryoIndex, position) => {
             const point = points[embryoIndex];
-            const visible = point.observed >= range.minimum && point.observed <= range.maximum && point.predicted >= range.minimum && point.predicted <= range.maximum;
+            const visible = point.observed >= left && point.observed <= left + span && point.predicted >= bottom && point.predicted <= bottom + span;
             if (!visible) return;
             createSvgElement(svg, "circle", { cx: x(point.observed), cy: y(point.predicted), r: 8, fill: "white", stroke: "#e66b57", "stroke-width": 3 });
             createSvgElement(svg, "text", { x: x(point.observed) + 11, y: y(point.predicted) - 10, fill: "#b64e3d", "font-weight": "700" }, position === 0 ? "A" : "B");
@@ -635,8 +657,8 @@
         const model = document.querySelector("#model").value;
         const points = chartPoints(model);
         bodies.forEach((body, index) => renderEmbryoCard(body, data[selected[index]]));
-        drawChart(document.querySelector("#scatter"), points, "full");
-        drawChart(document.querySelector("#expanded-scatter"), points, document.querySelector("#scale").value);
+        drawChart(document.querySelector("#scatter"), points);
+        drawChart(document.querySelector("#expanded-scatter"), points);
         const meanAbsoluteError = points.reduce((total, point) => total + Math.abs(point.observed - point.predicted), 0) / points.length;
         document.querySelector("#summary").textContent = `${data.length} eligible embryos · ${modelLabels[model]} mean absolute error: ${formatHours(meanAbsoluteError)}. Each point is a prediction from the fold that did not train on that embryo.`;
     }
@@ -645,7 +667,39 @@
     createCards();
     document.querySelector("#cohort-count").textContent = data.length;
     document.querySelector("#model").addEventListener("change", render);
-    document.querySelector("#scale").addEventListener("change", render);
+    const scaleMenu = document.querySelector("#scale");
+    function changeView(next, preset, points) {
+        viewport = next;
+        scaleMenu.value = preset;
+        for (const svg of document.querySelectorAll(".chart-shell svg")) drawChart(svg, points);
+    }
+    const currentPoints = () => chartPoints(document.querySelector("#model").value);
+    scaleMenu.addEventListener("change", () => {
+        const focused = scaleMenu.value === "focus";
+        changeView(focused ? {left: 35, bottom: 35, span: 70} : null, scaleMenu.value, currentPoints());
+    });
+    for (const svg of document.querySelectorAll(".chart-shell svg")) {
+        svg.addEventListener("dblclick", () => changeView(null, "full", currentPoints()));
+        svg.addEventListener("wheel", event => {
+            if (!event.deltaY) return;
+            const matrix = svg.getScreenCTM();
+            if (!matrix) return;
+            const pointer = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
+            const fx = (pointer.x - margin.left) / (760 - margin.left - margin.right);
+            const fy = 1 - (pointer.y - margin.top) / (510 - margin.top - margin.bottom);
+            if (fx < 0 || fx > 1 || fy < 0 || fy > 1) return;
+            event.preventDefault();
+            const points = currentPoints(), full = fullSpan(points);
+            const old = viewport ?? {left: 0, bottom: 0, span: full};
+            const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? 500 : 1;
+            const delta = Math.max(-300, Math.min(300, event.deltaY * unit));
+            const span = Math.max(3, Math.min(full, old.span * Math.exp(delta * .002)));
+            if (span === full) return changeView(null, "full", points);
+            const bound = value => Math.max(0, Math.min(full - span, value));
+            changeView({left: bound(old.left + fx * (old.span - span)),
+                        bottom: bound(old.bottom + fy * (old.span - span)), span}, "custom", points);
+        }, {passive: false});
+    }
     const dialog = document.querySelector("#chart-dialog");
     document.querySelector("#expand-chart").addEventListener("click", () => dialog.showModal());
     document.querySelector("#close-chart").addEventListener("click", () => dialog.close());

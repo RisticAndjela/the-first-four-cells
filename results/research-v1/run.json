@@ -1,0 +1,20 @@
+{
+  "families": [
+    "audit",
+    "trajectories",
+    "landmarks",
+    "benchmark",
+    "phenotypes",
+    "observation",
+    "sequences",
+    "grades"
+  ],
+  "seed": 42,
+  "numpy": "2.3.5",
+  "sklearn": "1.8.0",
+  "fold_unit": "embryo",
+  "hashes": {
+    "data/processed/cohort.csv": "36f2a0052b53977761a31a059ba318fcc654f02b82a0d12686f7a325ffdd0df9",
+    "data/external/embryo_dataset_grades.csv": "9613e35d79fede0910ccc592740c0c375c056cf6e3af406aae56ee0d670bd7cc"
+  }
+}

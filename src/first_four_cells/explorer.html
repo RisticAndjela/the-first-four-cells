@@ -1,56 +1,710 @@
 <!doctype html>
-<html lang="sr-Latn"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The First Four Cells · Poređenje embriona</title>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The First Four Cells · Embryo Explorer</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f5f3ed;color:#162f31;font:16px/1.45 Inter,Arial,sans-serif}main{max-width:1100px;margin:auto;padding:46px 24px}header{border-top:4px solid #236b67;padding:18px 0}h1,h2{font-family:Georgia,serif;font-weight:normal;margin:.2em 0}h1{font-size:clamp(36px,6vw,66px);letter-spacing:-.05em}h2{font-size:28px}p{margin:6px 0 18px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}article,section{background:#fffefa;border:1px solid #d6d9cf;padding:24px;border-radius:12px}section{margin-top:18px}select{display:block;width:100%;font:inherit;margin:6px 0 16px;padding:8px;background:white;color:inherit;border:1px solid #99aaa4;border-radius:5px}.line{display:grid;grid-template-columns:75px 1fr 65px;gap:9px;align-items:center;margin:8px 0;font-size:14px}.track{background:#e5ebe6;height:7px;border-radius:6px}.bar{background:#28746f;height:100%;border-radius:6px}.late{background:#9c5432}.num{text-align:right;font-variant-numeric:tabular-nums}table{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}td,th{padding:7px 2px;border-bottom:1px solid #ddd;text-align:right}td:first-child,th:first-child{text-align:left}figure{margin:18px 0 0}img{width:160px;border-radius:8px}figcaption,small{color:#50625e}svg{width:100%;max-height:340px;display:block}svg text{fill:#284442;font:13px Arial}@media(max-width:700px){.grid{grid-template-columns:1fr}main{padding:20px 12px}article,section{padding:16px}}
-</style><main><header><small>The First Four Cells</small><h1>Dva embriona, četiri ćelije</h1><p>Uporedi ritam ranih deoba i prognozu napravljenu u trenutku pojave četvrte ćelije.</p></header>
-<div class="grid" id="cards"></div>
-<section><h2>Koliko je prognoza blizu opažanju?</h2><label for="model">Model</label><select id="model"><option value="clock">Vreme do četiri ćelije</option><option value="rhythm" selected>Vreme i ritam deoba</option></select><p id="summary"></p><svg id="scatter" role="img" aria-label="Dijagram opaženih i predviđenih preostalih sati do blastociste"></svg><small>Svaka tačka predstavlja jedan embrion. Na dijagonali su predviđeno i opaženo vreme jednaki. Iznad nje model procenjuje da je potrebno više vremena.</small></section></main>
+    :root {
+        --ink: #102a43;
+        --muted: #617187;
+        --paper: #fbfcff;
+        --surface: #fff;
+        --line: #dce5ef;
+        --navy: #183b65;
+        --teal: #0f897d;
+        --coral: #e66b57;
+        --blue: #2f80ed;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        color: var(--ink);
+        background: linear-gradient(135deg, #edf4fb 0%, #f8fafc 48%, #e9f5f2 100%);
+        font: 16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    main {
+        max-width: 1240px;
+        margin: auto;
+        padding: 48px 24px 64px;
+    }
+
+    header {
+        padding: 28px 0 38px;
+    }
+
+    .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--teal);
+        font-size: .78rem;
+        font-weight: 800;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 3px;
+        border-radius: 4px;
+        background: var(--coral);
+    }
+
+    h1,
+    h2,
+    h3 {
+        margin: 0;
+        color: var(--ink);
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 400;
+    }
+
+    h1 {
+        max-width: 780px;
+        font-size: clamp(2.7rem, 6vw, 5.2rem);
+        line-height: .98;
+        letter-spacing: -.055em;
+    }
+
+    h2 {
+        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        letter-spacing: -.035em;
+    }
+
+    h3 {
+        font-size: 1.45rem;
+    }
+
+    .lede {
+        max-width: 720px;
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1.1rem;
+    }
+
+    .metric-grid,
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .metric,
+    .panel,
+    article {
+        background: rgba(255, 255, 255, .92);
+        border: 1px solid rgba(220, 229, 239, .95);
+        box-shadow: 0 16px 45px rgba(35, 65, 95, .07);
+        border-radius: 18px;
+    }
+
+    .metric {
+        padding: 19px 21px;
+    }
+
+    .metric span {
+        display: block;
+        color: var(--muted);
+        font-size: .78rem;
+        font-weight: 750;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+    }
+
+    .metric strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 1.7rem;
+        letter-spacing: -.04em;
+    }
+
+    .metric p {
+        margin: 2px 0 0;
+        color: var(--muted);
+        font-size: .87rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 22px;
+    }
+
+    article,
+    .panel {
+        padding: 28px;
+    }
+
+    .section-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 22px;
+    }
+
+    .section-header p {
+        max-width: 680px;
+        margin: 7px 0 0;
+        color: var(--muted);
+    }
+
+    label {
+        color: var(--muted);
+        font-size: .82rem;
+        font-weight: 750;
+    }
+
+    select {
+        display: block;
+        width: 100%;
+        margin: 6px 0 18px;
+        padding: 11px 12px;
+        color: var(--ink);
+        background: #fff;
+        border: 1px solid #cbd9e7;
+        border-radius: 9px;
+        font: inherit;
+    }
+
+    .timeline {
+        position: relative;
+        margin: 22px 0 18px;
+        padding: 14px 0 4px;
+    }
+
+    .timeline::before {
+        position: absolute;
+        top: 32px;
+        right: 7%;
+        left: 7%;
+        height: 2px;
+        background: #d9e5ef;
+        content: "";
+    }
+
+    .timeline-events {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4px;
+    }
+
+    .event {
+        text-align: center;
+    }
+
+    .event-marker {
+        display: grid;
+        width: 20px;
+        height: 20px;
+        margin: 8px auto 9px;
+        place-items: center;
+        border: 4px solid #fff;
+        border-radius: 50%;
+        background: var(--teal);
+        box-shadow: 0 0 0 2px var(--teal);
+    }
+
+    .event:last-child .event-marker {
+        background: var(--coral);
+        box-shadow: 0 0 0 2px var(--coral);
+    }
+
+    .event small {
+        display: block;
+        min-height: 34px;
+        color: var(--muted);
+        font-size: .72rem;
+        line-height: 1.2;
+    }
+
+    .event strong {
+        font-size: .86rem;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .cutoff-note {
+        margin: 12px 0 0;
+        padding: 12px 14px;
+        border-left: 3px solid var(--coral);
+        border-radius: 0 8px 8px 0;
+        background: #fff5f2;
+        color: #7b4338;
+        font-size: .88rem;
+    }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        font-size: .89rem;
+    }
+
+    td,
+    th {
+        padding: 10px 5px;
+        border-bottom: 1px solid var(--line);
+        text-align: right;
+    }
+
+    th {
+        color: var(--muted);
+        font-size: .72rem;
+        letter-spacing: .05em;
+        text-transform: uppercase;
+    }
+
+    td:first-child,
+    th:first-child {
+        text-align: left;
+    }
+
+    .best {
+        color: var(--teal);
+        font-weight: 750;
+    }
+
+    figcaption,
+    .caption {
+        color: var(--muted);
+        font-size: .86rem;
+    }
+
+    figure {
+        margin: 18px 0 0;
+    }
+
+    img {
+        width: 160px;
+        border-radius: 10px;
+    }
+
+    .chart-panel {
+        margin-top: 22px;
+    }
+
+    .controls {
+        display: flex;
+        align-items: end;
+        gap: 12px;
+    }
+
+    .controls {
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+    }
+    .controls select, button {
+        min-height: 42px;
+        line-height: 1.25;
+    }
+    .controls select {
+        margin: 5px 0 0;
+    }
+    button:focus-visible, select:focus-visible {
+        outline: 2px solid var(--teal);
+        outline-offset: 2px;
+    }
+    .controls label {
+        min-width: min(210px, 100%);
+    }
+
+    button {
+        padding: 10px 13px;
+        border: 1px solid #c5d5e5;
+        border-radius: 9px;
+        color: var(--navy);
+        background: #fff;
+        cursor: pointer;
+        white-space: nowrap;
+        font: 700 .84rem/1.25 Inter, ui-sans-serif, sans-serif;
+    }
+
+    button:hover {
+        border-color: var(--teal);
+        color: var(--teal);
+    }
+
+    .chart-shell {
+        position: relative;
+        min-height: 400px;
+        border: 1px solid #e1e9f1;
+        border-radius: 14px;
+        background: linear-gradient(180deg, #fff 0%, #fbfdff 100%);
+        overflow: hidden;
+    }
+
+    svg {
+        display: block;
+        width: 100%;
+        height: 440px;
+    }
+
+    svg text {
+        fill: #52667c;
+        font: 12px Inter, Arial, sans-serif;
+    }
+
+    .chart-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin: 14px 0 4px;
+        color: var(--muted);
+        font-size: .83rem;
+    }
+
+    .key {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--blue);
+    }
+
+    .dot.selected {
+        background: transparent;
+        border: 2px solid var(--coral);
+    }
+
+    dialog {
+        width: min(1160px, calc(100% - 32px));
+        max-height: calc(100% - 32px);
+        padding: 0;
+        border: 0;
+        border-radius: 18px;
+        box-shadow: 0 24px 80px rgba(11, 30, 52, .3);
+    }
+
+    dialog::backdrop {
+        background: rgba(9, 27, 47, .58);
+        backdrop-filter: blur(3px);
+    }
+
+    .dialog-content {
+        padding: 24px;
+    }
+
+    .dialog-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: start;
+    }
+
+    .dialog-head button {
+        flex: none;
+    }
+
+    dialog .chart-shell {
+        margin-top: 18px;
+    }
+
+    dialog svg {
+        height: min(70vh, 690px);
+    }
+
+    @media(max-width:760px) {
+        main {
+            padding: 28px 14px 42px
+        }
+
+        .metric-grid,
+        .grid {
+            grid-template-columns: 1fr
+        }
+
+        article,
+        .panel {
+            padding: 20px
+        }
+
+        .section-header {
+            display: block
+        }
+
+        .controls label {
+            display: block
+        }
+
+        .controls button {
+            margin: 0
+        }
+
+        .chart-shell {
+            min-height: 320px
+        }
+
+        svg {
+            height: 350px
+        }
+    }
+</style>
+<main>
+    <header>
+        <div class="eyebrow">The First Four Cells</div>
+        <h1>What early developmental rhythm adds to a forecast.</h1>
+        <p class="lede">Compare two embryo timelines at the first four-cell frame, then inspect how closely held-out
+            predictions match the observed blastocyst time across the eligible cohort.</p>
+    </header>
+    <div class="metric-grid" aria-label="Study summary">
+        <div class="metric"><span>Eligible cohort</span><strong id="cohort-count">—</strong>
+            <p>Embryos with t2, t3, t4 and tB in order.</p>
+        </div>
+        <div class="metric"><span>Forecast cutoff</span><strong>First t4 frame</strong>
+            <p>Only information observed by four cells is used.</p>
+        </div>
+        <div class="metric"><span>Evaluation</span><strong>5 held-out folds</strong>
+            <p>Each embryo is evaluated once outside its training fold.</p>
+        </div>
+    </div>
+    <div class="grid" id="cards"></div>
+    <section class="panel chart-panel">
+        <div class="section-header">
+            <div>
+                <div class="eyebrow">Held-out performance</div>
+                <h2>How close are the forecasts?</h2>
+                <p id="summary"></p>
+            </div>
+        </div>
+        <div class="controls"><label for="model">Prediction model<select id="model">
+                    <option value="clock">Clock model · t4 only</option>
+                    <option value="rhythm" selected>Rhythm model · t4 + early intervals</option>
+                </select></label><button type="button" id="expand-chart" aria-haspopup="dialog">Expand chart</button>
+        </div>
+        <div class="chart-shell"><svg id="scatter" role="img"
+                aria-label="Observed and predicted remaining hours to blastocyst"></svg></div>
+        <div class="chart-legend"><span class="key"><i class="dot"></i>One eligible embryo</span><span class="key"><i
+                    class="dot selected"></i>Selected comparison embryos</span><span class="key">Dashed line: perfect
+                agreement</span></div>
+        <p class="caption">Axes show hours remaining from the first t4 frame to the observed or predicted first
+            blastocyst frame. Points above the diagonal are overestimates; points below it are underestimates. Use
+            the wheel over the plot to zoom in or out. Double-click to reset.</p>
+    </section>
+</main>
+<dialog id="chart-dialog" aria-label="Expanded prediction chart">
+    <div class="dialog-content">
+        <div class="dialog-head">
+            <div>
+                <div class="eyebrow">Detailed view</div>
+                <h2>Observed versus predicted time</h2>
+                <p class="caption">Adjust the scale to inspect the central cohort or the full range. Scroll up to zoom in and down to zoom out. Double-click to reset.</p>
+            </div><button type="button" id="close-chart">Close</button>
+        </div>
+        <div class="controls"><label for="scale">Chart scale<select id="scale">
+                    <option value="full">Full observed range</option>
+                    <option value="focus">Focus on 35–105 hours</option><option value="custom" disabled>Custom zoom</option>
+                </select></label></div>
+        <div class="chart-shell"><svg id="expanded-scatter" role="img"
+                aria-label="Expanded observed and predicted chart"></svg></div>
+    </div>
+</dialog>
 <script>
-const data=/*COHORT_DATA*/;
-const fmt=n=>n.toLocaleString("sr-Latn",{minimumFractionDigits:1,maximumFractionDigits:1});
-const maxTime=Math.max(...data.map(e=>e.times[3]));
-const selected=[0,1];
-// Choose a reproducible starting pair by early timing only.
-let closest=Infinity, gap=-1;
-for(let i=0;i<data.length;i++)for(let j=i+1;j<data.length;j++){
- const a=data[i].times,b=data[j].times,d=Math.abs(a[2]-b[2]),g=Math.abs((a[2]-a[1])-(b[2]-b[1]));
- if(d<closest || (d===closest && g>gap)){closest=d;gap=g;selected[0]=i;selected[1]=j}
-}
-function el(tag,parent,text){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;parent.append(e);return e}
-const bodies=[];
-selected.forEach((index,k)=>{
- const card=el("article",cards), label=el("label",card,"Embrion "+(k===0?"A":"B")), menu=el("select",label);
- data.forEach((e,i)=>menu.add(new Option(e.id,i)));menu.value=index;
- bodies.push(el("div",card));menu.onchange=()=>{selected[k]=Number(menu.value);draw()};
-});
-function cardView(root,e){
- root.replaceChildren();el("h2",root,"Razvoj kroz vreme");el("small",root,"Protekli sati od oplodnje · ista skala za oba embriona");
- ["2 ćelije","3 ćelije","4 ćelije","Blastocista"].forEach((s,i)=>{
- const row=el("div",root);row.className="line";el("span",row,s);
- const track=el("div",row);track.className="track";const bar=el("div",track);bar.className="bar"+(i===3?" late":"");bar.style.width=100*e.times[i]/maxTime+"%";el("span",row,fmt(e.times[i])+" h").className="num";
- });
- const obs=e.times[3]-e.times[2];el("p",root,"Od četiri ćelije do blastociste: "+fmt(obs)+" h.");
- const t=el("table",root),h=el("tr",t);["Model","Prognoza¹","Greška²"].forEach(v=>el("th",h,v));
- for(const key of ["clock","rhythm"]){const r=el("tr",t);[key==="clock"?"Vreme":"Vreme + ritam",fmt(e.predictions[key]-e.times[2])+" h",fmt(Math.abs(e.predictions[key]-e.times[3]))+" h"].forEach(v=>el("td",r,v))}
- el("small",root,"¹ Preostalo vreme od četvrte ćelije. ² Apsolutna greška.");
- if(e.image){const f=el("figure",root),im=el("img",f);im.src="data:image/jpeg;base64,"+e.image;im.alt="Prvi četvoroćelijski kadar embriona "+e.id;el("figcaption",f,"Centralna ravan · kadar "+e.frame)}
-}
-function draw(){
- selected.forEach((i,k)=>cardView(bodies[k],data[i]));
- const model=document.querySelector("#model").value,svg=document.querySelector("#scatter");
- svg.replaceChildren();svg.setAttribute("viewBox","0 0 650 335");
- function shape(tag,attrs,txt){const n=document.createElementNS("http://www.w3.org/2000/svg",tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));if(txt)n.textContent=txt;svg.append(n);return n}
- const pts=data.map(e=>[e.times[3]-e.times[2],e.predictions[model]-e.times[2]]);
- const limit=Math.ceil(Math.max(...pts.flat())/20)*20,lo=Math.min(0,Math.floor(Math.min(...pts.flat())/20)*20);
- const x=v=>60+(v-lo)/(limit-lo)*555,y=v=>282-(v-lo)/(limit-lo)*245;
- for(let v=lo;v<=limit;v+=20){shape("line",{x1:x(v),x2:x(v),y1:37,y2:282,stroke:"#e3e9e4"});shape("line",{x1:60,x2:615,y1:y(v),y2:y(v),stroke:"#e3e9e4"});shape("text",{x:x(v),y:303,"text-anchor":"middle"},String(v));shape("text",{x:50,y:y(v)+4,"text-anchor":"end"},String(v))}
- shape("line",{x1:x(lo),x2:x(limit),y1:y(lo),y2:y(limit),stroke:"#5a6e68","stroke-dasharray":"5 4"});
- shape("text",{x:60,y:19},"Predviđeno (h)");shape("text",{x:615,y:328,"text-anchor":"end"},"Opaženo (h)");
- pts.forEach(([a,b])=>shape("circle",{cx:x(a),cy:y(b),r:3,fill:"#28746f",opacity:.48}));
- selected.forEach((i,k)=>{const [a,b]=pts[i];shape("circle",{cx:x(a),cy:y(b),r:6,fill:"none",stroke:"#9c5432","stroke-width":2});shape("text",{x:x(a)+(k?-9:9),y:y(b)-6},k?"B":"A")});
- const mae=pts.reduce((s,[a,b])=>s+Math.abs(a-b),0)/pts.length;
- document.querySelector("#summary").textContent=data.length+" embriona · prosečna apsolutna greška na izdvojenim predikcijama: "+fmt(mae)+" h.";
-}
-document.querySelector("#model").onchange=draw;draw();
-</script></html>
+    const data = /*COHORT_DATA*/;
+    const eventLabels = ["Two cells", "Three cells", "Four cells", "Blastocyst"];
+    const modelLabels = { clock: "Clock model", rhythm: "Rhythm model" };
+    const formatHours = value => `${value.toLocaleString("en", { minimumFractionDigits: 1, maximumFractionDigits: 1 })} h`;
+    const selected = [0, 1];
+    const cards = document.querySelector("#cards");
+    const bodies = [];
+
+    function chooseStartingPair() {
+        let closestGap = Infinity;
+        let largestRhythmDifference = -1;
+        for (let first = 0; first < data.length; first += 1) {
+            for (let second = first + 1; second < data.length; second += 1) {
+                const firstTimes = data[first].times;
+                const secondTimes = data[second].times;
+                const fourCellGap = Math.abs(firstTimes[2] - secondTimes[2]);
+                const rhythmDifference = Math.abs((firstTimes[2] - firstTimes[1]) - (secondTimes[2] - secondTimes[1]));
+                if (fourCellGap < closestGap || (fourCellGap === closestGap && rhythmDifference > largestRhythmDifference)) {
+                    closestGap = fourCellGap;
+                    largestRhythmDifference = rhythmDifference;
+                    selected[0] = first;
+                    selected[1] = second;
+                }
+            }
+        }
+    }
+
+    function createElement(tag, parent, text) {
+        const element = document.createElement(tag);
+        if (text !== undefined) element.textContent = text;
+        parent.append(element);
+        return element;
+    }
+
+    function createCards() {
+        selected.forEach((index, position) => {
+            const card = createElement("article", cards);
+            const heading = createElement("h3", card, `Embryo ${position === 0 ? "A" : "B"}`);
+            heading.id = `embryo-${position}-heading`;
+            const label = createElement("label", card, "Select embryo");
+            label.id = `embryo-${position}-label`;
+            label.htmlFor = `embryo-${position}`;
+            const select = createElement("select", card);
+            select.id = `embryo-${position}`;
+            select.setAttribute("aria-labelledby", `${heading.id} ${label.id}`);
+            data.forEach((embryo, embryoIndex) => select.add(new Option(embryo.id, embryoIndex)));
+            select.value = index;
+            const body = createElement("div", card);
+            bodies.push(body);
+            select.addEventListener("change", () => { selected[position] = Number(select.value); render(); });
+        });
+    }
+
+    function renderEmbryoCard(root, embryo) {
+        root.replaceChildren();
+        createElement("p", root, "Observed elapsed time from fertilisation. Both timelines share the same events; the forecast is made at four cells.").className = "caption";
+        const timeline = createElement("div", root);
+        timeline.className = "timeline";
+        const events = createElement("div", timeline);
+        events.className = "timeline-events";
+        eventLabels.forEach((label, index) => {
+            const event = createElement("div", events);
+            event.className = "event";
+            createElement("small", event, label);
+            createElement("i", event).className = "event-marker";
+            createElement("strong", event, formatHours(embryo.times[index]));
+        });
+        const remaining = embryo.times[3] - embryo.times[2];
+        createElement("p", root, `Observed time from four cells to blastocyst: ${formatHours(remaining)}.`).className = "cutoff-note";
+
+        const table = createElement("table", root);
+        table.setAttribute("aria-label", `Prediction comparison for embryo ${embryo.id}`);
+        const header = createElement("tr", table);
+        ["Model", "Predicted remaining", "Absolute error"].forEach(value => createElement("th", header, value));
+        ["clock", "rhythm"].forEach(key => {
+            const row = createElement("tr", table);
+            const error = Math.abs(embryo.predictions[key] - embryo.times[3]);
+            createElement("td", row, modelLabels[key]);
+            createElement("td", row, formatHours(embryo.predictions[key] - embryo.times[2]));
+            const errorCell = createElement("td", row, formatHours(error));
+            if (error === Math.min(...Object.keys(modelLabels).map(model => Math.abs(embryo.predictions[model] - embryo.times[3])))) errorCell.className = "best";
+        });
+        createElement("p", root, "Predictions are held-out estimates. Lower absolute error is closer to the observed blastocyst time.").className = "caption";
+        if (embryo.image) {
+            const figure = createElement("figure", root);
+            const image = createElement("img", figure);
+            image.src = `data:image/jpeg;base64,${embryo.image}`;
+            image.alt = `First four-cell frame for embryo ${embryo.id}`;
+            createElement("figcaption", figure, `Central plane · frame ${embryo.frame}`);
+        }
+    }
+
+    function createSvgElement(svg, tag, attributes, text) {
+        const element = document.createElementNS("http://www.w3.org/2000/svg", tag);
+        Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
+        if (text !== undefined) element.textContent = text;
+        svg.append(element);
+        return element;
+    }
+
+    function chartPoints(model) {
+        return data.map(embryo => ({ observed: embryo.times[3] - embryo.times[2], predicted: embryo.predictions[model] - embryo.times[2] }));
+    }
+
+    const margin = { top: 48, right: 42, bottom: 72, left: 82 };
+    let viewport = null;
+    function fullSpan(points) {
+        return Math.ceil(Math.max(...points.flatMap(p => [p.observed, p.predicted])) / 20) * 20;
+    }
+    function drawChart(svg, points) {
+        svg.replaceChildren();
+        svg.setAttribute("viewBox", "0 0 760 510");
+        const {left, bottom, span} = viewport ?? {left: 0, bottom: 0, span: fullSpan(points)};
+        const width = 760 - margin.left - margin.right;
+        const height = 510 - margin.top - margin.bottom;
+        const x = value => margin.left + (value - left) / span * width;
+        const y = value => margin.top + height - (value - bottom) / span * height;
+        const step = [0.5, 1, 2, 5, 10, 20, 50, 100].find(n => span / n <= 9) ?? 100;
+        for (let tick = Math.ceil(left / step) * step; tick <= left + span; tick += step) {
+            createSvgElement(svg, "line", { x1: x(tick), x2: x(tick), y1: margin.top, y2: margin.top + height, stroke: "#e6eef5" });
+            createSvgElement(svg, "text", { x: x(tick), y: margin.top + height + 25, "text-anchor": "middle" }, tick);
+        }
+        for (let tick = Math.ceil(bottom / step) * step; tick <= bottom + span; tick += step) {
+            createSvgElement(svg, "line", { x1: margin.left, x2: margin.left + width, y1: y(tick), y2: y(tick), stroke: "#e6eef5" });
+            createSvgElement(svg, "text", { x: margin.left - 12, y: y(tick) + 4, "text-anchor": "end" }, tick);
+        }
+        const start = Math.max(left, bottom), end = Math.min(left + span, bottom + span);
+        if (start <= end) createSvgElement(svg, "line", { x1: x(start), x2: x(end), y1: y(start), y2: y(end), stroke: "#93a5b7", "stroke-width": 1.5, "stroke-dasharray": "6 5" });
+        createSvgElement(svg, "text", { x: margin.left, y: 22, "font-weight": "700" }, "Predicted remaining hours");
+        createSvgElement(svg, "text", { x: margin.left + width, y: 496, "text-anchor": "end", "font-weight": "700" }, "Observed remaining hours");
+        points.forEach(point => {
+            const visible = point.observed >= left && point.observed <= left + span && point.predicted >= bottom && point.predicted <= bottom + span;
+            if (visible) createSvgElement(svg, "circle", { cx: x(point.observed), cy: y(point.predicted), r: 4, fill: "#2f80ed", opacity: ".5" });
+        });
+        selected.forEach((embryoIndex, position) => {
+            const point = points[embryoIndex];
+            const visible = point.observed >= left && point.observed <= left + span && point.predicted >= bottom && point.predicted <= bottom + span;
+            if (!visible) return;
+            createSvgElement(svg, "circle", { cx: x(point.observed), cy: y(point.predicted), r: 8, fill: "white", stroke: "#e66b57", "stroke-width": 3 });
+            createSvgElement(svg, "text", { x: x(point.observed) + 11, y: y(point.predicted) - 10, fill: "#b64e3d", "font-weight": "700" }, position === 0 ? "A" : "B");
+        });
+    }
+
+    function render() {
+        const model = document.querySelector("#model").value;
+        const points = chartPoints(model);
+        bodies.forEach((body, index) => renderEmbryoCard(body, data[selected[index]]));
+        drawChart(document.querySelector("#scatter"), points);
+        drawChart(document.querySelector("#expanded-scatter"), points);
+        const meanAbsoluteError = points.reduce((total, point) => total + Math.abs(point.observed - point.predicted), 0) / points.length;
+        document.querySelector("#summary").textContent = `${data.length} eligible embryos · ${modelLabels[model]} mean absolute error: ${formatHours(meanAbsoluteError)}. Each point is a prediction from the fold that did not train on that embryo.`;
+    }
+
+    chooseStartingPair();
+    createCards();
+    document.querySelector("#cohort-count").textContent = data.length;
+    document.querySelector("#model").addEventListener("change", render);
+    const scaleMenu = document.querySelector("#scale");
+    function changeView(next, preset, points) {
+        viewport = next;
+        scaleMenu.value = preset;
+        for (const svg of document.querySelectorAll(".chart-shell svg")) drawChart(svg, points);
+    }
+    const currentPoints = () => chartPoints(document.querySelector("#model").value);
+    scaleMenu.addEventListener("change", () => {
+        const focused = scaleMenu.value === "focus";
+        changeView(focused ? {left: 35, bottom: 35, span: 70} : null, scaleMenu.value, currentPoints());
+    });
+    for (const svg of document.querySelectorAll(".chart-shell svg")) {
+        svg.addEventListener("dblclick", () => changeView(null, "full", currentPoints()));
+        svg.addEventListener("wheel", event => {
+            if (!event.deltaY) return;
+            const matrix = svg.getScreenCTM();
+            if (!matrix) return;
+            const pointer = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
+            const fx = (pointer.x - margin.left) / (760 - margin.left - margin.right);
+            const fy = 1 - (pointer.y - margin.top) / (510 - margin.top - margin.bottom);
+            if (fx < 0 || fx > 1 || fy < 0 || fy > 1) return;
+            event.preventDefault();
+            const points = currentPoints(), full = fullSpan(points);
+            const old = viewport ?? {left: 0, bottom: 0, span: full};
+            const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? 500 : 1;
+            const delta = Math.max(-300, Math.min(300, event.deltaY * unit));
+            const span = Math.max(3, Math.min(full, old.span * Math.exp(delta * .002)));
+            if (span === full) return changeView(null, "full", points);
+            const bound = value => Math.max(0, Math.min(full - span, value));
+            changeView({left: bound(old.left + fx * (old.span - span)),
+                        bottom: bound(old.bottom + fy * (old.span - span)), span}, "custom", points);
+        }, {passive: false});
+    }
+    const dialog = document.querySelector("#chart-dialog");
+    document.querySelector("#expand-chart").addEventListener("click", () => dialog.showModal());
+    document.querySelector("#close-chart").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); });
+    render();
+</script>
+
+</html>
